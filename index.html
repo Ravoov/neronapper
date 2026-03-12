@@ -392,14 +392,13 @@ function setProgress(step){
   document.getElementById('step-label').textContent=step+' / '+TOTAL_STEPS;
 }
 const names =[
-  'Raviv',
-  'Jonas'
+  'Ravoov'
 ]
   
 function startApp(){
   username=document.getElementById('username-input').value.trim();
   if(!username){showToast('Please enter your name');return;}
-  if(!names.includes(username)){showToast('Invalid username');return;}
+  //if(!names.includes(username)){showToast('Invalid username');return;}
   showScreen('screen-survey');
   setProgress(1);
   renderQuestion(0);
