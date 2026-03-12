@@ -669,11 +669,15 @@ async function submitToAPI(){
   const status=document.getElementById('submit-status');
   btn.disabled=true; btn.textContent='Saving...';
   status.textContent=''; status.className='submit-status';
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const dateStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
   try{
     const res=await fetch(`${API}/create_contact`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:username,memory_score:memoryScore,sleep_score:sleepScore})
+      body:JSON.stringify({name:username,memory_score:memoryScore,sleep_score:sleepScore,date:dateStr})
     });
     const data=await res.json();
     if(res.ok){
