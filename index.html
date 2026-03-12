@@ -20,16 +20,6 @@
   --muted:#5555aa;
   --danger:#ff3366;
   --success:#00f5d4;
-
-  /* Game colors */
-  --col-red:#ff3b5c;
-  --col-blue:#3b8cff;
-  --col-green:#3bff8c;
-  --col-yellow:#ffe03b;
-  --col-purple:#b83bff;
-  --col-orange:#ff8c3b;
-  --col-pink:#ff3bb8;
-  --col-teal:#3bfff0;
 }
 
 body{
@@ -69,7 +59,6 @@ body{
 }
 .screen.active{display:flex;}
 
-/* PROGRESS */
 .progress-wrap{position:fixed;top:0;left:0;right:0;z-index:100;height:3px;background:var(--border);}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.5s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 8px var(--accent);}
 .step-label{position:fixed;top:16px;right:20px;z-index:100;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.1em;}
@@ -112,7 +101,7 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 .btn-next.ready{opacity:1;pointer-events:all;}
 .btn-next.ready:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,245,212,0.5);}
 
-/* ── MEMORY TEST ── */
+/* MEMORY TEST */
 #screen-memory{gap:0;}
 .memory-header{text-align:center;margin-bottom:32px;}
 .memory-header h2{font-size:clamp(24px,4vw,40px);font-weight:900;margin-bottom:8px;}
@@ -121,7 +110,19 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 .phase-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:8px 16px;font-size:12px;letter-spacing:0.1em;color:var(--muted);margin-bottom:24px;text-transform:uppercase;}
 .phase-dot{width:6px;height:6px;border-radius:50%;}
 
-/* COLOR GRID — memorize */
+/* Stroop hint badge */
+.stroop-hint{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,230,0,0.08);
+  border:1px solid rgba(255,230,0,0.25);
+  border-radius:10px;padding:10px 16px;
+  font-size:13px;color:var(--accent3);
+  margin-bottom:20px;max-width:480px;
+  line-height:1.5;text-align:center;
+}
+.stroop-hint strong{color:#fff;}
+
+/* COLOR GRID */
 .color-grid{
   display:grid;
   gap:14px;
@@ -150,17 +151,19 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 }
 @keyframes tileReveal{from{transform:scale(0.6) rotate(-6deg);opacity:0;}to{transform:scale(1) rotate(0deg);opacity:1;}}
 
-/* color label inside tile */
+/* Random word label on tile — distractor word */
 .tile-label{
   position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
   font-family:'Outfit',sans-serif;font-weight:900;
   font-size:clamp(11px,2vw,15px);
   color:rgba(255,255,255,0.85);
-  text-shadow:0 1px 4px rgba(0,0,0,0.5);
+  text-shadow:0 1px 4px rgba(0,0,0,0.6);
   letter-spacing:0.05em;
   text-transform:uppercase;
   z-index:1;
+  text-align:center;
+  padding:4px;
 }
 
 /* COUNTDOWN */
@@ -180,7 +183,7 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 }
 .seq-dot.filled{border-width:2px;transform:scale(1.1);}
 
-/* RECALL GRID — buttons */
+/* RECALL GRID */
 .recall-grid{
   display:grid;
   gap:12px;
@@ -197,10 +200,14 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
   transition:all 0.2s;
   position:relative;overflow:hidden;
   font-family:'Outfit',sans-serif;font-weight:900;
-  font-size:clamp(11px,2vw,14px);
-  color:rgba(255,255,255,0.85);
-  text-shadow:0 1px 4px rgba(0,0,0,0.5);
-  letter-spacing:0.05em;text-transform:uppercase;
+  /* Stroop: font color is deliberately contrasting */
+  font-size:clamp(10px,1.8vw,13px);
+  text-shadow:0 1px 4px rgba(0,0,0,0.7);
+  letter-spacing:0.04em;text-transform:uppercase;
+  padding:4px;
+  line-height:1.2;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
 }
 .recall-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 60%);}
 .recall-btn:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.3);}
@@ -219,10 +226,9 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .recall-btn:disabled{opacity:0.4;pointer-events:none;filter:grayscale(0.5);}
 
-/* round info */
 .round-info{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px;letter-spacing:0.08em;}
 
-/* ── RESULTS ── */
+/* RESULTS */
 #screen-results{gap:24px;}
 .result-header{text-align:center;}
 .result-header .grade{font-size:clamp(80px,15vw,140px);font-weight:900;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -244,7 +250,6 @@ h1 .highlight{background:linear-gradient(90deg,var(--accent),var(--accent2));-we
 .submit-status.err{color:var(--danger);}
 .sep{width:60px;height:2px;background:var(--border);margin:8px auto;}
 
-/* TOAST */
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 24px;font-size:14px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:toastIn 0.3s ease;display:none;}
 .toast.show{display:block;}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
@@ -298,23 +303,33 @@ const COLORS = [
   { name:'Teal',   hex:'#3bfff0' },
 ];
 
-// ── ROUNDS: easier — fewer colors, more time ─────────────────────
+// ── DISTRACTOR WORDS shown on tiles (NOT color names) ────────────
+// Pool of random everyday words used during memorize phase
+const DISTRACTOR_WORDS = [
+  'CLOUD','STONE','RIVER','FOREST','CLOCK','EMBER','WAVE','PRISM',
+  'LUNAR','DRIFT','SPARK','VORTEX','FROST','CEDAR','FLAME','TIDE',
+  'BRIDGE','ECHO','BLOOM','STORM','GLASS','PEARL','SWIFT','CREST',
+  'FLINT','GROVE','BASIN','QUARTZ','PLUME','RIDGE'
+];
+
+// ── ROUNDS ───────────────────────────────────────────────────────
 const MEM_ROUNDS = [
-  { count:3, cols:3, time:5  },  // Round 1: 3 colors, 5s
-  { count:4, cols:4, time:6  },  // Round 2: 4 colors, 6s
-  { count:6, cols:3, time:8  },  // Round 3: 6 colors, 8s
+  { count:3, cols:3, time:5  },
+  { count:4, cols:4, time:6  },
+  { count:6, cols:3, time:8  },
 ];
 
 // ── STATE ────────────────────────────────────────────────────────
 let username='', sleepScore=0, memoryScore=0;
 let surveyAnswers={}, currentQ=0;
 let memRound=0, memRoundScores=[];
+// Each entry: { color, distractorWord }
 let memSequence=[], memUserSeq=[], memCorrect=0;
 let countdownTimer=null;
 
-const TOTAL_STEPS = 5 + 3; // 5 survey + 3 rounds
+const TOTAL_STEPS = 5 + 3;
 
-// ── SURVEY ───────────────────────────────────────────────────────
+// ── SURVEY QUESTIONS ─────────────────────────────────────────────
 const surveyQuestions = [
   {
     id:'hours', type:'options',
@@ -464,6 +479,16 @@ function nextQuestion(){
   }
 }
 
+// ── HELPERS ──────────────────────────────────────────────────────
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
+
+function pickRandom(arr, n){ return shuffle(arr).slice(0,n); }
+
+// Pick n unique distractor words (guaranteed different from each other)
+function pickDistractorWords(n){
+  return shuffle(DISTRACTOR_WORDS).slice(0, n);
+}
+
 // ── MEMORY TEST ──────────────────────────────────────────────────
 function startMemoryTest(){
   showScreen('screen-memory');
@@ -471,15 +496,20 @@ function startMemoryTest(){
   runMemRound();
 }
 
-function pickColors(count){
-  return [...COLORS].sort(()=>Math.random()-0.5).slice(0,count);
-}
-
 function runMemRound(){
   const cfg=MEM_ROUNDS[memRound];
-  memSequence=pickColors(cfg.count);
-  memUserSeq=[];
-  memCorrect=0;
+  // Pick colors for this round
+  const chosenColors = shuffle(COLORS).slice(0, cfg.count);
+  // Pick distractor words — one per tile, all different
+  const words = pickDistractorWords(cfg.count);
+
+  // Build sequence: each item has a color + a distractor word (not the color name)
+  memSequence = chosenColors.map((c, i) => ({
+    color: c,
+    distractorWord: words[i]
+  }));
+
+  memUserSeq=[]; memCorrect=0;
   setProgress(surveyQuestions.length+1+memRound);
   renderMemorizePhase(cfg);
 }
@@ -487,9 +517,9 @@ function runMemRound(){
 function renderMemorizePhase(cfg){
   const mem=document.getElementById('screen-memory');
 
-  const tiles=memSequence.map((c,i)=>`
+  const tiles=memSequence.map((item,i)=>`
     <div class="color-tile hidden-tile" id="tile-${i}" style="animation-delay:${i*130}ms">
-      <div class="tile-label">${c.name}</div>
+      <div class="tile-label">${item.distractorWord}</div>
     </div>`).join('');
 
   mem.innerHTML=`
@@ -499,7 +529,10 @@ function renderMemorizePhase(cfg){
     </div>
     <div class="memory-header">
       <h2>Memorize the colors</h2>
-      <p>Remember the order of these ${cfg.count} colors</p>
+      <p>Ignore the words — remember the <strong>color</strong> of each tile in order</p>
+    </div>
+    <div class="stroop-hint">
+      ⚠️ <strong>Don't be fooled!</strong> The words on the tiles are random distractions. Focus on the <strong>tile color</strong>, not the word.
     </div>
     <div class="countdown-ring">
       <svg width="80" height="80" viewBox="0 0 90 90">
@@ -511,20 +544,20 @@ function renderMemorizePhase(cfg){
     <div class="color-grid g${cfg.cols}">${tiles}</div>
   `;
 
-  // reveal tiles
-  memSequence.forEach((c,i)=>{
+  // Reveal tiles
+  memSequence.forEach((item,i)=>{
     setTimeout(()=>{
       const t=document.getElementById(`tile-${i}`);
       if(t){
         t.classList.remove('hidden-tile');
         t.classList.add('reveal');
-        t.style.background=c.hex;
-        t.style.boxShadow=`0 6px 24px ${c.hex}55`;
+        t.style.background=item.color.hex;
+        t.style.boxShadow=`0 6px 24px ${item.color.hex}55`;
       }
     },i*160+200);
   });
 
-  // countdown
+  // Countdown
   let t=cfg.time;
   if(countdownTimer) clearInterval(countdownTimer);
   countdownTimer=setInterval(()=>{
@@ -540,33 +573,53 @@ function renderMemorizePhase(cfg){
 function renderRecallPhase(cfg){
   const mem=document.getElementById('screen-memory');
 
-  // build answer pool: correct colors + decoy colors, shuffled
+  // Build answer options: correct colors + decoy colors
   const decoyCount=Math.min(COLORS.length-cfg.count, cfg.count);
-  const decoys=COLORS.filter(c=>!memSequence.includes(c))
+  const decoyColors=COLORS.filter(c=>!memSequence.some(item=>item.color.name===c.name))
     .sort(()=>Math.random()-0.5).slice(0,decoyCount);
-  const allOptions=[...memSequence,...decoys].sort(()=>Math.random()-0.5);
+  const allColors=[...memSequence.map(item=>item.color),...decoyColors].sort(()=>Math.random()-0.5);
+
+  // For each button color, assign a RANDOM distractor word from the pool
+  // The same words from the memorize phase may reappear, but on DIFFERENT colors — this is the Stroop twist!
+  const recallWords = shuffle(DISTRACTOR_WORDS).slice(0, allColors.length);
 
   const dots=memSequence.map((_,i)=>
     `<div class="seq-dot" id="dot-${i}"></div>`).join('');
 
-  const buttons=allOptions.map(c=>
-    `<button class="recall-btn" style="background:${c.hex};box-shadow:0 4px 20px ${c.hex}44"
-      onclick="recallSelect('${c.name}',this)">${c.name}</button>`
-  ).join('');
+  // Each button: background = actual color, text = random (probably mismatched) word
+  const buttons=allColors.map((c,i)=>{
+    // Pick a contrasting text color so the word is always legible
+    const textColor = getContrastWord(c.hex);
+    return `<button class="recall-btn"
+      style="background:${c.hex};box-shadow:0 4px 20px ${c.hex}44;color:${textColor};"
+      data-colorname="${c.name}"
+      onclick="recallSelect('${c.name}',this)">${recallWords[i]}</button>`;
+  }).join('');
 
   mem.innerHTML=`
     <div class="phase-badge">
       <div class="phase-dot" style="background:var(--accent2)"></div>
       Round ${memRound+1} — Recall
     </div>
-    <div class="recall-prompt" style="text-align:center;margin-bottom:20px">
+    <div class="recall-prompt" style="text-align:center;margin-bottom:12px">
       <h3 style="font-size:22px;font-weight:700;margin-bottom:6px">Tap the colors in order</h3>
-      <p style="font-size:14px;color:var(--muted)">Recreate the sequence from memory</p>
+      <p style="font-size:14px;color:var(--muted)">Select by <strong style="color:var(--text)">tile color</strong> — ignore the words!</p>
     </div>
-    <div class="round-info">${memRound===0?'Hint: the color names are shown on each tile!':''}</div>
+    <div class="stroop-hint" style="margin-bottom:16px;">
+      ⚠️ The words don't match the colors. Trust your memory of the <strong>colors</strong>.
+    </div>
     <div class="sequence-display">${dots}</div>
     <div class="recall-grid g${cfg.cols}">${buttons}</div>
   `;
+}
+
+// Returns a light or dark color for text contrast on a given hex bg
+function getContrastWord(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  const lum=(0.299*r+0.587*g+0.114*b)/255;
+  return lum>0.55?'rgba(0,0,0,0.75)':'rgba(255,255,255,0.85)';
 }
 
 function recallSelect(colorName, btn){
@@ -575,19 +628,18 @@ function recallSelect(colorName, btn){
   const dotIdx=memUserSeq.length-1;
   const dot=document.getElementById(`dot-${dotIdx}`);
 
-  if(colorName===expected.name){
+  if(colorName===expected.color.name){
     btn.classList.add('correct');
     btn.disabled=true;
     if(dot){
-      dot.style.background=expected.hex;
-      dot.style.boxShadow=`0 0 12px ${expected.hex}88`;
-      dot.style.borderColor=expected.hex;
+      dot.style.background=expected.color.hex;
+      dot.style.boxShadow=`0 0 12px ${expected.color.hex}88`;
+      dot.style.borderColor=expected.color.hex;
       dot.classList.add('filled');
     }
     memCorrect++;
 
     if(memUserSeq.length===memSequence.length){
-      // round complete
       const roundScore=Math.round((memCorrect/memSequence.length)*100);
       memRoundScores.push(roundScore);
       memRound++;
@@ -599,7 +651,6 @@ function recallSelect(colorName, btn){
     }
   } else {
     btn.classList.add('wrong');
-    // still count partial score
     const roundScore=Math.round((memCorrect/memSequence.length)*100);
     memRoundScores.push(roundScore);
     memRound++;
@@ -627,9 +678,9 @@ function showResults(){
     D:'Your body and mind need more rest. Take care of yourself.'
   }[grade];
 
-  const memInsight=memoryScore>=80?'Sharp color recall and strong visual memory.':
-    memoryScore>=60?'Decent memory, some lapses under pressure.':
-    'Memory performance was below average — rest helps consolidate memory.';
+  const memInsight=memoryScore>=80?'Strong visual memory — you stayed focused despite the Stroop distractors.':
+    memoryScore>=60?'Decent recall under distraction. More sleep may sharpen focus further.':
+    'The random word distractors may have interfered. Rest helps resist cognitive interference.';
   const slpInsight=sleepScore>=80?'Your sleep habits look healthy and restorative.':
     sleepScore>=55?'Sleep quality is moderate — some room to improve.':
     'Your sleep is significantly disrupted. This directly impacts cognition.';
